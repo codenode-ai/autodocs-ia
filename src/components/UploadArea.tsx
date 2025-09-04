@@ -138,7 +138,7 @@ export const UploadArea = () => {
   };
 
   return (
-    <div className="p-8 space-y-8 animate-fade-in">
+    <div className="p-8 space-y-8 animate-fade-in bg-gradient-warm min-h-screen">
       <div>
         <h1 className="text-3xl font-bold text-foreground">Upload de Documentos</h1>
         <p className="text-muted-foreground mt-2">
@@ -146,15 +146,18 @@ export const UploadArea = () => {
         </p>
       </div>
 
-      <Card className="animate-slide-up">
+      <Card className="animate-slide-up bg-card/80 backdrop-blur-sm">
         <CardContent className="p-8">
           <div
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
-            className={`relative border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
+            className={`relative border-2 border-dashed rounded-lg p-8 text-center transition-all duration-300 ease-[cubic-bezier(0.4,0,0.6,1)] ${
               isDragging ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'
-            } ${isProcessing ? 'opacity-50 pointer-events-none' : ''}`}
+            } ${isProcessing ? 'opacity-50 pointer-events-none animate-pulse' : ''}`}
+            style={{
+              animation: isProcessing ? 'pulse 2s cubic-bezier(0.4,0,0.6,1) infinite' : 'none'
+            }}
           >
             <Upload className={`mx-auto h-12 w-12 mb-4 ${
               isProcessing ? 'text-primary animate-pulse' : 'text-muted-foreground'
@@ -182,7 +185,7 @@ export const UploadArea = () => {
       </Card>
 
       {state.documents.length > 0 && (
-        <Card className="animate-slide-up" style={{ animationDelay: "200ms" }}>
+        <Card className="animate-slide-up bg-card/80 backdrop-blur-sm" style={{ animationDelay: "200ms" }}>
           <CardContent className="p-6">
             <h3 className="text-lg font-semibold text-foreground mb-4">
               Documentos Enviados ({state.documents.length})
@@ -196,7 +199,15 @@ export const UploadArea = () => {
                 return (
                   <div
                     key={document.id}
-                    className="flex items-center justify-between p-4 bg-muted/50 rounded-lg border border-border"
+                    className={`flex items-center justify-between p-4 rounded-lg border border-border transition-all duration-300 ease-in-out ${
+                      document.status === 'uploading' 
+                        ? 'bg-primary/10 border-primary/20' 
+                        : document.status === 'processing' 
+                          ? 'bg-primary/5 border-primary/10' 
+                          : document.status === 'completed' 
+                            ? 'bg-accent/10 border-accent/20' 
+                            : 'bg-destructive/10 border-destructive/20'
+                    }`}
                   >
                     <div className="flex items-center space-x-3">
                       <FileIcon className="h-8 w-8 text-muted-foreground" />
