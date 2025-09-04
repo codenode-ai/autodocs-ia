@@ -34,19 +34,30 @@ export const Sidebar = ({ activeTab, onTabChange }: SidebarProps) => {
           {menuItems.map((item) => {
             const Icon = item.icon;
             return (
-              <li key={item.id}>
+              <li key={item.id} className="relative">
                 <button
                   onClick={() => onTabChange(item.id)}
                   className={cn(
-                    "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
+                    "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] transform",
                     activeTab === item.id
                       ? "bg-primary text-primary-foreground shadow-soft"
                       : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                   )}
+                  onMouseEnter={(e) => {
+                    if (activeTab !== item.id) {
+                      e.currentTarget.style.transform = "translateX(4px)";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "translateX(0)";
+                  }}
                 >
                   <Icon className="w-4 h-4" />
                   {item.label}
                 </button>
+                {activeTab === item.id && (
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary to-accent rounded-r-sm pointer-events-none" />
+                )}
               </li>
             );
           })}

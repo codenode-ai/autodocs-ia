@@ -172,7 +172,7 @@ const ReportEditor = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="border-b border-border bg-card">
+      <div className="border-b border-border bg-card/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -180,7 +180,7 @@ const ReportEditor = () => {
                 variant="ghost"
                 size="sm"
                 onClick={() => navigate("/")}
-                className="hover:bg-secondary"
+                className="hover:bg-secondary transition-all duration-200 ease-in-out transform hover:-translate-x-1"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Voltar
@@ -188,7 +188,7 @@ const ReportEditor = () => {
               <div>
                 <h1 className="text-2xl font-bold text-foreground">Editor de Relatório</h1>
                 {isAutoSaving && (
-                  <p className="text-sm text-muted-foreground">Salvando automaticamente...</p>
+                  <p className="text-sm text-muted-foreground opacity-0 transition-opacity duration-300 ease-in-out animate-fade-in">Salvando automaticamente...</p>
                 )}
               </div>
             </div>
@@ -197,7 +197,7 @@ const ReportEditor = () => {
                 variant="outline"
                 size="sm"
                 onClick={handleSave}
-                className="hover:bg-secondary"
+                className="hover:bg-secondary transition-all duration-200 ease-in-out transform hover:-translate-y-1"
               >
                 <Save className="h-4 w-4 mr-2" />
                 Salvar
@@ -206,7 +206,7 @@ const ReportEditor = () => {
                 variant="outline"
                 size="sm"
                 onClick={handleDownloadDoc}
-                className="hover:bg-secondary"
+                className="hover:bg-secondary transition-all duration-200 ease-in-out transform hover:-translate-y-1"
               >
                 <FileText className="h-4 w-4 mr-2" />
                 Baixar Editável
@@ -214,7 +214,7 @@ const ReportEditor = () => {
               <Button
                 size="sm"
                 onClick={handleDownloadPDF}
-                className="bg-primary hover:bg-primary-hover"
+                className="bg-primary hover:bg-primary-hover transition-all duration-200 ease-in-out transform hover:-translate-y-1"
               >
                 <Download className="h-4 w-4 mr-2" />
                 Baixar PDF
@@ -228,26 +228,26 @@ const ReportEditor = () => {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Sidebar with metadata */}
           <div className="lg:col-span-1">
-            <Card>
+            <Card className="rounded-lg transition-all duration-300 ease-in-out hover:shadow-medium">
               <CardHeader>
                 <CardTitle className="text-lg">Configurações</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div>
+                <div className="space-y-2">
                   <Label htmlFor="title">Título do Relatório</Label>
                   <Input
                     id="title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="Digite o título..."
-                    className="mt-1"
+                    className="mt-1 transition-all duration-200 ease-in-out focus:ring-2 focus:ring-primary"
                   />
                 </div>
                 
-                <div>
+                <div className="space-y-2">
                   <Label htmlFor="type">Tipo de Relatório</Label>
                   <Select value={type} onValueChange={(value) => setType(value as any)}>
-                    <SelectTrigger className="mt-1">
+                    <SelectTrigger className="mt-1 transition-all duration-200 ease-in-out hover:bg-secondary">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -273,7 +273,7 @@ const ReportEditor = () => {
 
           {/* Main editor */}
           <div className="lg:col-span-3">
-            <Card className="h-full">
+            <Card className="h-full rounded-lg transition-all duration-300 ease-in-out hover:shadow-medium">
               <CardHeader>
                 <CardTitle className="text-lg">Conteúdo do Relatório</CardTitle>
               </CardHeader>

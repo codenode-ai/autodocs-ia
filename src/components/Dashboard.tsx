@@ -102,7 +102,7 @@ export const Dashboard = () => {
   }
 
   return (
-    <div className="p-8 space-y-8 animate-fade-in">
+    <div className="p-8 space-y-8 animate-fade-in bg-gradient-warm min-h-screen">
       <div>
         <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
         <p className="text-muted-foreground mt-2">
@@ -117,8 +117,14 @@ export const Dashboard = () => {
           return (
             <Card 
               key={stat.title} 
-              className="animate-slide-up hover:shadow-medium transition-shadow duration-200"
+              className="animate-slide-up hover:shadow-large transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] transform bg-card/70 backdrop-blur-sm border border-border/50"
               style={{ animationDelay: `${index * 100}ms` }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-4px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
             >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium text-muted-foreground">
@@ -127,7 +133,7 @@ export const Dashboard = () => {
                 <Icon className={`h-5 w-5 ${stat.color}`} />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-foreground">{stat.value}</div>
+                <div className="text-2xl font-bold text-foreground font-variant-numeric: tabular-nums">{stat.value}</div>
                 <p className="text-xs text-muted-foreground mt-1">{stat.change}</p>
               </CardContent>
             </Card>
@@ -136,7 +142,7 @@ export const Dashboard = () => {
       </div>
 
       {/* Recent Reports */}
-      <Card className="animate-slide-up" style={{ animationDelay: "400ms" }}>
+      <Card className="animate-slide-up bg-card/80 backdrop-blur-sm" style={{ animationDelay: "400ms" }}>
         <CardHeader>
           <CardTitle className="text-xl">Relatórios Recentes</CardTitle>
         </CardHeader>

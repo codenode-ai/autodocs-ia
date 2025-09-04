@@ -93,13 +93,13 @@ export const ReportsList = () => {
         variant: "secondary" as const, 
         icon: Clock, 
         label: "Processando",
-        className: "text-primary"
+        className: "text-primary bg-gradient-to-r from-primary to-primary-hover text-primary-foreground animate-pulse"
       },
       completed: { 
         variant: "default" as const, 
         icon: CheckCircle, 
         label: "Concluído",
-        className: "text-accent"
+        className: "text-accent bg-gradient-to-r from-accent to-accent-hover text-accent-foreground"
       },
       error: { 
         variant: "destructive" as const, 
@@ -140,7 +140,7 @@ export const ReportsList = () => {
   };
 
   return (
-    <div className="p-8 space-y-8 animate-fade-in">
+    <div className="p-8 space-y-8 animate-fade-in bg-gradient-warm min-h-screen">
       <div className="flex justify-between items-start">
         <div>
           <h1 className="text-3xl font-bold text-foreground">Relatórios</h1>
@@ -233,7 +233,7 @@ export const ReportsList = () => {
       </div>
 
       {state.reports.length === 0 ? (
-        <Card className="animate-slide-up">
+        <Card className="animate-slide-up bg-card/80 backdrop-blur-sm">
           <CardContent className="flex flex-col items-center justify-center py-16">
             <FileText className="h-16 w-16 text-muted-foreground mb-4" />
             <h3 className="text-lg font-medium text-foreground mb-2">
@@ -257,8 +257,14 @@ export const ReportsList = () => {
           {state.reports.map((report, index) => (
             <Card 
               key={report.id} 
-              className="animate-slide-up hover:shadow-medium transition-shadow duration-200"
+              className="animate-slide-up hover:shadow-large transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] transform bg-card/80 backdrop-blur-sm"
               style={{ animationDelay: `${index * 100}ms` }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-2px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
             >
               <CardHeader className="pb-4">
                 <div className="flex justify-between items-start">
