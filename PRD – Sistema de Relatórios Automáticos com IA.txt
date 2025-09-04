@@ -1,0 +1,136 @@
+PRD – Sistema de Relatórios Automáticos com IA
+1. Visão Geral
+O Relatórios Automáticos com IA é um sistema web single tenant para empresas de engenharia, manutenção e consultoria.
+ O usuário insere dados de campo (fotos, checklists, observações), e o sistema gera um relatório técnico estruturado em Markdown/PDF, utilizando Inteligência Artificial para acelerar a produção.
+Objetivo principal: reduzir drasticamente o tempo de elaboração de relatórios técnicos, mantendo padrão profissional e identidade visual da empresa.
+________________________________________
+2. Stakeholders
+●	Usuários finais: engenheiros, inspetores, técnicos de manutenção, consultores.
+
+●	Clientes compradores: empresas de engenharia, construtoras, indústrias, consultorias ambientais, clínicas de segurança do trabalho.
+
+●	Equipe de TI: desenvolvedores responsáveis pela configuração da instância para cada cliente.
+
+________________________________________
+3. Principais Funcionalidades
+3.1 Autenticação
+●	Login e cadastro via e-mail e senha.
+
+●	Cada instância isolada por cliente (single tenant).
+
+3.2 Gestão de Projetos
+●	Criar, editar e excluir projetos.
+
+●	Associar relatórios a projetos.
+
+3.3 Criação de Relatórios (Wizard em 3 etapas)
+1.	Dados básicos: título, tipo de relatório, seleção de projeto.
+
+2.	Upload de evidências: fotos (com legenda), planilhas/checklists, observações.
+
+3.	Rascunho com IA: geração automática de texto técnico padronizado.
+
+3.4 Editor de Relatório
+●	Pré-visualização do rascunho em Markdown.
+
+●	Possibilidade de edição manual antes da finalização.
+
+3.5 Exportação
+●	Geração de PDF com logo, cores e cabeçalho da empresa.
+
+●	Armazenamento seguro dos relatórios no sistema.
+
+●	Download e compartilhamento interno.
+
+3.6 Gestão de Relatórios
+●	Listagem por projeto, data ou status (rascunho/finalizado).
+
+●	Reabertura para edição.
+
+●	Histórico completo.
+
+________________________________________
+4. Requisitos Funcionais
+●	Upload de fotos e anexos em relatórios.
+
+●	IA deve gerar rascunho em até 30 segundos.
+
+●	Relatórios devem ser exportados em PDF com identidade visual personalizada.
+
+●	Controle de acesso por usuário.
+
+●	Isolamento total de dados por cliente (single tenant).
+
+________________________________________
+5. Requisitos Não Funcionais
+●	Segurança: RLS (Row Level Security) no Supabase.
+
+●	Performance: geração de relatório < 30s.
+
+●	Escalabilidade: replicação fácil de instâncias para novos clientes.
+
+●	Usabilidade: interface limpa e responsiva (desktop e tablet).
+
+________________________________________
+6. Stack Tecnológica
+●	Frontend: React 18 + Vite + Tailwind CSS.
+
+●	Backend: Supabase (Auth, PostgreSQL, Storage, Edge Functions).
+
+●	IA: OpenAI GPT-4o-mini (texto + visão para descrição de fotos).
+
+●	Exportação: @react-pdf/renderer.
+
+●	Deploy: Vercel ou VPS dedicada (DigitalOcean, Hostinger).
+
+________________________________________
+7. Roadmap MVP
+Fase 1 – Setup (semana 1)
+●	Configuração do projeto (React, Tailwind, Supabase, Auth).
+
+Fase 2 – Estrutura (semanas 2–3)
+●	CRUD de Projetos.
+
+●	CRUD de Relatórios.
+
+●	Upload de fotos e notas.
+
+Fase 3 – IA (semana 4)
+●	Função Edge no Supabase chamando OpenAI.
+
+●	Geração de rascunho em Markdown.
+
+Fase 4 – PDF (semana 5)
+●	Editor de texto.
+
+●	Exportação em PDF com logo/cores da empresa.
+
+Fase 5 – Polimento (semana 6)
+●	UX (loading states, wizard progress).
+
+●	Testes manuais.
+
+●	Deploy inicial (Vercel ou VPS).
+
+________________________________________
+8. Critérios de Sucesso
+●	Usuário consegue gerar relatório em menos de 5 minutos após inserir dados.
+
+●	Redução de pelo menos 50% do tempo gasto em relatórios manuais.
+
+●	Relatórios finais com apresentação profissional (logo, cabeçalho, seções).
+
+●	Primeiros clientes validam usabilidade e percebem valor.
+
+________________________________________
+9. Possíveis Evoluções (pós-MVP)
+●	Assinatura digital (CRC/CREA, hash de documento).
+
+●	Visão computacional para descrição automática das fotos.
+
+●	Templates múltiplos de relatórios.
+
+●	Permissões de equipe (inspetor, revisor, admin).
+
+●	Busca inteligente em relatórios anteriores.
+
